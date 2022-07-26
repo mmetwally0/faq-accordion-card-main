@@ -30,14 +30,14 @@ function hideAnswer(question) {
 questions.forEach((question) => {
   // Hide all other answers
   question.addEventListener("click", function () {
-    questions.forEach((question) => {
-      hideAnswer(question);
-    });
-
-    if (this.style.fontWeight == "700") {
-      hideAnswer(this);
-      console.log("nope");
-    } else {
+      
+      if (this.style.fontWeight == "700") {
+          hideAnswer(this);
+          console.log("nope");
+        } else {
+        questions.forEach((question) => {
+          hideAnswer(question);
+        });
       showAnswer(this);
     }
   });
