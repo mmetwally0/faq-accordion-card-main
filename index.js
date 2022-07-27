@@ -24,20 +24,19 @@ function hideAnswer(question) {
   currentArrow.style.transform = "rotateX(0deg)";
   question.style.fontWeight = "400";
   question.style.color = "hsl(237, 12%, 33%)";
+  currentAnswer.classList.toggle("show");
 }
 
 // Select all the question and answer-pairs
 questions.forEach((question) => {
-  // Hide all other answers
   question.addEventListener("click", function () {
-      
-      if (this.style.fontWeight == "700") {
-          hideAnswer(this);
-          console.log("nope");
-        } else {
-        questions.forEach((question) => {
-          hideAnswer(question);
-        });
+    if (this.style.fontWeight == "700") {
+      hideAnswer(this);
+    } else {
+      // Hide all other answers
+      questions.forEach((question) => {
+        hideAnswer(question);
+      });
       showAnswer(this);
     }
   });

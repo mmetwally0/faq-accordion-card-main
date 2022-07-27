@@ -13,6 +13,22 @@ $colors: (
   @return map-get($colors, $color_name);
 }
 
+@mixin animate($animation, $duration, $method, $times) {
+  animation: $animation $duration $method $times;
+}
+
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1400px) {
+    @content;
+  }
+}
+
 html,
 body {
   margin: 0;
@@ -37,24 +53,71 @@ body {
   z-index: -99;
 }
 
-.art {
-  position: absolute;
-  top: 0.1em;
-  left: 6em;
-
-  .pattern {
-    margin-top: -6em;
-  }
-}
 .card {
+  @include desktop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "art text";
+    margin-right: 10em;
+    
+  }
+
   height: 45em;
   width: 85vw;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.5);
 }
+.art {
+  @include desktop {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    position: absolute;
+    top: 10em;
+    left: 15em;
+    
+    overflow: hidden;
+    
+  }
+
+  position: absolute;
+  top: 0.1em;
+  left: 6em;
+
+  .pattern {
+    margin-top: -6em;
+
+    @include desktop{
+      position: relative;
+      top: -45em;
+      left: -45em;
+      
+    }
+  }
+
+  .illustration{
+    @include desktop{
+      position: relative;
+      display: block;
+      top: 7em;
+      left: -4em;
+      
+    }
+  }
+
+  
+
+}
 
 .text {
+  @include desktop {
+    grid-column-start: 2;
+    padding: 4em 10em 2em 2em;
+    z-index: 12;
+    font-size: 14px;
+
+  }
   padding: 9em 2em 2em;
 
   .title {
@@ -62,15 +125,19 @@ body {
     font-weight: 400;
     text-align: center;
     color: color(primary-dark);
+
+    @include desktop{
+      text-align: start;
+    }
   }
 
   .q-and-a {
     margin-bottom: 1em;
 
-    .divider{
-        width: 100%;
-        height: 1px;
-        background-color: color(divider);
+    .divider {
+      width: 100%;
+      height: 1px;
+      background-color: color(divider);
     }
   }
 
@@ -89,19 +156,43 @@ body {
     }
   }
 
+  .question:hover {
+    cursor: pointer;
+  }
+
   .answer {
+    @include desktop{
+      width: 100%;
+    }
+
     display: none;
     margin-top: -1em;
     color: color(neutral-dark);
     width: 18em;
+    @include keyframes(show) {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @include animate(show, 1s, ease, 1);
   }
 }
 
 
 
 
+.box{
+  display: none;
 
-
-
-
-
+  @include desktop{
+    display: block;
+    position: relative;
+    z-index: 99;
+    left: 5em;
+    top: 5em;
+  }
+}

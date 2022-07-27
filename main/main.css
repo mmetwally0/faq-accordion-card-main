@@ -19,15 +19,6 @@ body {
   z-index: -99;
 }
 
-.art {
-  position: absolute;
-  top: 0.1em;
-  left: 6em;
-}
-.art .pattern {
-  margin-top: -6em;
-}
-
 .card {
   height: 45em;
   width: 85vw;
@@ -35,15 +26,70 @@ body {
   border-radius: 20px;
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.5);
 }
+@media (min-width: 1400px) {
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "art text";
+    margin-right: 10em;
+  }
+}
+
+.art {
+  position: absolute;
+  top: 0.1em;
+  left: 6em;
+}
+@media (min-width: 1400px) {
+  .art {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    position: absolute;
+    top: 10em;
+    left: 15em;
+    overflow: hidden;
+  }
+}
+.art .pattern {
+  margin-top: -6em;
+}
+@media (min-width: 1400px) {
+  .art .pattern {
+    position: relative;
+    top: -45em;
+    left: -45em;
+  }
+}
+@media (min-width: 1400px) {
+  .art .illustration {
+    position: relative;
+    display: block;
+    top: 7em;
+    left: -4em;
+  }
+}
 
 .text {
   padding: 9em 2em 2em;
+}
+@media (min-width: 1400px) {
+  .text {
+    grid-column-start: 2;
+    padding: 4em 10em 2em 2em;
+    z-index: 12;
+    font-size: 14px;
+  }
 }
 .text .title {
   font-size: 1.3em;
   font-weight: 400;
   text-align: center;
   color: hsl(238deg, 29%, 16%);
+}
+@media (min-width: 1400px) {
+  .text .title {
+    text-align: start;
+  }
 }
 .text .q-and-a {
   margin-bottom: 1em;
@@ -65,9 +111,48 @@ body {
   margin-left: auto;
   height: 100%;
 }
+.text .question:hover {
+  cursor: pointer;
+}
 .text .answer {
   display: none;
   margin-top: -1em;
   color: hsl(240deg, 6%, 50%);
   width: 18em;
+  -webkit-animation: show 1s ease 1;
+          animation: show 1s ease 1;
+}
+@media (min-width: 1400px) {
+  .text .answer {
+    width: 100%;
+  }
+}
+@-webkit-keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.box {
+  display: none;
+}
+@media (min-width: 1400px) {
+  .box {
+    display: block;
+    position: relative;
+    z-index: 99;
+    left: 5em;
+    top: 5em;
+  }
 }/*# sourceMappingURL=main.css.map */
